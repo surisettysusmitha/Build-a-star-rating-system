@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Star Rating System</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            text-align: center;
+        }
+
+        .rating {
+            display: flex;
+            flex-direction: row-reverse;
+            cursor: pointer;
+            margin-bottom: 10px;
+        }
+
+        .star {
+            font-size: 2em;
+            color: #ccc;
+            margin: 0.1em;
+        }
+
+        .star:hover,
+        .star:hover ~ .star {
+            color: #ffcc00;
+        }
+
+        .rated .star,
+        .rated .star ~ .star {
+            color: #ffcc00;
+        }
+
+        #submitBtn {
+            font-size: 1em;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div id="rating" class="rating">
+        <span class="star" onclick="rate(5)">★</span>
+        <span class="star" onclick="rate(4)">★</span>
+        <span class="star" onclick="rate(3)">★</span>
+        <span class="star" onclick="rate(2)">★</span>
+        <span class="star" onclick="rate(1)">★</span>
+    </div>
+
+    <button id="submitBtn" onclick="submitRating()">Submit Rating</button>
+</div>
+
+<script>
+    let ratedValue = 0;
+
+    function rate(value) {
+        ratedValue = value;
+        document.getElementById('rating').classList.add('rated');
+        highlightStars();
+    }
+
+    function highlightStars() {
+        const stars = document.querySelectorAll('.star');
+        stars.forEach((star, index) => {
+            star.style.color = index < ratedValue ? '#ffcc00' : '#ccc';
+        });
+    }
+
+    function submitRating() {
+        alert(`You've submitted a rating of ${ratedValue} stars!`);
+        
+    }
+</script>
+
+</body>
+</html>
